@@ -136,9 +136,7 @@ handEvaluator = (hand) => {
     if (!flush && !straight && !fourKindCheck(numberObj) && threeCheck.length === 0) {
         let pairs = Object.keys(numberObj).filter(key => numberObj[key] >= 2).map(number => faceCardAdjuster(number, 14))
 
-        let pairFound = Object.values(numberObj).some(element => element >= 2)
-
-        if (!pairFound) {
+        if (pairs.length === 0) {
             let highCard = Object.keys(numberObj).map(number => faceCardAdjuster(number, 14))
             handType = [0, Math.max(...highCard)]
         }
@@ -172,7 +170,6 @@ winner = (hands) => {
     let handEvaluations = hands.map(hand => {
         return [...handEvaluator(hand[0]), hand[1]]
     })
-    console.log(handEvaluations)
     let ranks = handEvaluations.map(hand => [hand[0], hand[2]])
     let highestRanked = Math.max(...ranks.map(rank => rank[0]))
     let potentialWinners = handEvaluations.filter(hand => hand[0] === highestRanked)
@@ -190,4 +187,4 @@ winner = (hands) => {
     }
 }
 
-console.log(winner([[["Ts","Td", "Ac", "Qh", "Ks"], user1], [["Ts","Td", "Ac", "Jh", "Ks"], user2]]))
+console.log(winner([[["Ts","2d", "4c", "Qh", "Ks"], user1], [["Ts","2d", "9c", "Ah", "Ks"], user2]]))
