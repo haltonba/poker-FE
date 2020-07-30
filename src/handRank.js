@@ -1,3 +1,5 @@
+import { array } from "prop-types"
+
 let user1 = 1
 let user2 = 2
 let user3 = 3
@@ -173,18 +175,19 @@ winner = (hands) => {
     let ranks = handEvaluations.map(hand => [hand[0], hand[2]])
     let highestRanked = Math.max(...ranks.map(rank => rank[0]))
     let potentialWinners = handEvaluations.filter(hand => hand[0] === highestRanked)
+    let winningRank = Object.keys(handNames).find(key => handNames[key] === potentialWinners[0][0])
 
     if (potentialWinners.length === 1) {
-        return [Object.keys(handNames).find(key => handNames[key] === potentialWinners[0][0]), [potentialWinners[0][2]]]
+        return [winningRank, [potentialWinners[0][2]]]
     }
     else if (potentialWinners.every(hand => hand[1] === potentialWinners[0][1])) {
         let winningIds = potentialWinners.map(hand => hand[2])
-        return [Object.keys(handNames).find(key => handNames[key] === potentialWinners[0][0]), winningIds]
+        return [winningRank, winningIds]
     }
     else {
         let highCard = Math.max(...potentialWinners.map(hand => hand[1]))
-        return [Object.keys(handNames).find(key => handNames[key] === potentialWinners[0][0]), [potentialWinners.filter(hand => hand[1] === highCard)[0][2]]] 
+        return [winningRank, [potentialWinners.filter(hand => hand[1] === highCard)[0][2]]] 
     }
 }
 
-console.log(winner([[["Ts","2d", "4c", "Qh", "Ks"], user1], [["Ts","2d", "9c", "Ah", "Ks"], user2]]))
+console.log(winner([[["7s","7d", "7c", "7h", "3s"], user1], [["7s","7d", "7c", "7h", "6c"], user2]]))
