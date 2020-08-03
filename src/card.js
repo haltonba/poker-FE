@@ -12,7 +12,6 @@ export default class Card extends Component {
     icon = this.suitIcons[this.props.card[1]]
 
   render() {
-      console.log(this.icon.charAt(this.icon.length-1))
     return (
       <div>
           <span style={{color: this.icon === "♦" || this.icon === "♥" ? "red" : "black" }}>{this.props.card[0] + this.icon}</span>

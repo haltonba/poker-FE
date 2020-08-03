@@ -42,7 +42,7 @@ export default class Actions extends Component {
             </form> : null}
           {this.props.currentBet > 0 ? <button onClick={(event, bet, chips, actionType) => this.props.handleActionSubmit(event, this.props.currentBet, this.props.seatId, "call")}>CALL</button> : null}
           {this.props.currentBet === 0 ? <button onClick={(event, bet, chips, actionType) => this.props.handleActionSubmit(event, 0, this.props.seatId, "check")}>CHECK</button> : null}
-          <button>FOLD</button>
+          <button onClick={(event, bet, chips, actionType) => this.props.handleActionSubmit(event, 0, this.props.seatId, "fold")}>FOLD</button>
       </div>
     )
   }
